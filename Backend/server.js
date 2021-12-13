@@ -3,6 +3,7 @@ const student = require('./services/student')
 const user = require('./services/user')
 
 const app = express()
+app.use(express.json()) // for parsing application/json
 
 app.use('/student', student)
 app.use('/user', user)
