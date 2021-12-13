@@ -72,4 +72,31 @@ Here are some extra credit tasks that you can do. These tasks are not required. 
 * Authenticated links
   * Unauthenticated users can only access `/register/` and `/login/` routes.
   * Return `HTTP Error 401`.
-* 
+
+# Submitting
+## 1. Fork the repository.
+
+![img](https://kingslanduniversity.com/wp-content/uploads/2021/12/Repository-Forking.gif)
+
+## 2. Clone the repository locally.
+
+`git clone (your-unique-https-or-ssh-repository-link)`
+
+![img](https://kingslanduniversity.com/wp-content/uploads/2021/12/Repository-Cloning.gif)
+
+You will need to push changes into your forked repository.
+
+## 3. Create a pull request to the main repository
+
+Go to the Pull Requests section of the main repository.
+
+https://github.com/kingsland-innovation-center/Kingsland-Full-Stack-OJT-Assessment/compare
+
+Make sure to select the source `base repository:` as your forked repository and the target `base repository:` as our repository. You will see the list of changes. 
+
+From here, click on `Create a pull request`.
+
+![img](https://kingslanduniversity.com/wp-content/uploads/2021/12/v5ILL6EYFi.gif)
+
+# Assessment Timeframe
+You will hear from us within 1-2 business days regarding your assessment.
