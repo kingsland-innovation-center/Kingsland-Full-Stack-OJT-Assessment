@@ -64,6 +64,7 @@ Here are some extra credit tasks that you can do. These tasks are not required. 
   * Prompts such as `Are you sure you want to delete the student?`
 * Route restrictions
   * Unauthenticated users should only be allowed to access `/`, `/register`, and `/login` routes.
+* Unit tests
 
 ## Backend
 * Tokenized Sessions
@@ -72,6 +73,7 @@ Here are some extra credit tasks that you can do. These tasks are not required. 
 * Authenticated links
   * Unauthenticated users can only access `/register/` and `/login/` routes.
   * Return `HTTP Error 401`.
+* Unit tests
 
 # Submitting
 ## 1. Fork the repository.
@@ -100,3 +102,7 @@ From here, click on `Create a pull request`.
 
 # Assessment Timeframe
 You will hear from us within 1-2 business days regarding your assessment.
+
+<p align="center">
+© 2021 Kingsland University, Kingsland Technology Philippines Inc., All rights reserved.
+</p>

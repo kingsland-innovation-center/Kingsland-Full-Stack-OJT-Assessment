@@ -17,17 +17,17 @@ const Students = () => {
         <tbody>
           <tr>
             <td>Sean Cadubla</td>
-            <td>Zero-to-blockchain</td>
+            <td>Zero-to-Blockchain Program</td>
             <td>sean@kingsland.io</td>
           </tr>
           <tr>
             <td>Rave Arevalo</td>
-            <td>Full Stack</td>
+            <td>Full Stack Developer Program</td>
             <td>rave@kingsland.io</td>
           </tr>
           <tr>
             <td>Pia Bonilla</td>
-            <td>Tech Sales</td>
+            <td>Tech Sales Program</td>
             <td>pia@kingsland.io</td>
           </tr>
         </tbody>

@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 const Dashboard = () => {
   return (
     <Container className='h-100 d-flex flex-column align-items-center justify-content-center'>
-      <h2>Welcome</h2>
+      <h2>Dashboard</h2>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu sem id
       neque auctor interdum a in enim. Phasellus mollis dapibus quam commodo
       eleifend. Phasellus eu nibh sapien. Donec aliquet sem nec lorem
