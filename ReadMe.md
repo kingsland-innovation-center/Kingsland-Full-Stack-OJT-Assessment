@@ -101,7 +101,7 @@ From here, click on `Create a pull request`.
 ![img](https://kingslanduniversity.com/wp-content/uploads/2021/12/v5ILL6EYFi.gif)
 
 # Assessment Timeframe
-You will hear from us within 1-2 business days regarding your assessment.
+You will hear from us within 1-2 business days regarding your assessment after you submitted your pull request.
 
 <p align="center">
 © 2021 Kingsland University, Kingsland Technology Philippines Inc., All rights reserved.
