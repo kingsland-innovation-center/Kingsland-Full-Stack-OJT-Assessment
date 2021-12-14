@@ -77,15 +77,17 @@ Here are some extra credit tasks that you can do. These tasks are not required. 
   * Prompts such as `Are you sure you want to delete the student?`
 * Route restrictions
   * Unauthenticated users should only be allowed to access `/`, `/register`, and `/login` routes.
+* Optimizations
+  * Refactor repetitive container code into one unified component.
 * Unit tests
 
 ## Backend
 * Tokenized Sessions
   * You may use your own algorithm to generate tokens.
-  * You may opt to use cookies or local storage token.
+  * You may opt to use cookies or local storage tokens.
 * Authenticated links
   * Unauthenticated users can only access `/register/` and `/login/` routes.
-  * Return `HTTP Error 401`.
+  * Return proper HTTP codes.
 * Unit tests
 
 # Submitting
