@@ -3,6 +3,20 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+/**
+ * Implement the login functionality.
+ * 
+ * Given a username and password, check the database for a match.
+ * If a match is found, log the user in.
+ * 
+ * For this assessment, tokenizing the username and password is not required.
+ * You may simulate the response for correct/incorrect logins such as:
+ * {
+ *  isUserValid: boolean
+ * }
+ * 
+ * Then, redirect appropriately to /dashboard and adjust the sidebar menuitems accordingly.
+ */
 const Login = () => {
   return (
     <Container className='h-100 d-flex flex-column align-items-center justify-content-center'>

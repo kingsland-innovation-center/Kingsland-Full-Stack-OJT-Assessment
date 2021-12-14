@@ -2,6 +2,17 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 
+/**
+ * Implement the read students information.
+ * 
+ * The model definition is:
+ * [{
+ *  firstName: string,
+ *  lastName: string,
+ *  email: string,
+ *  program: string
+ * }]
+ */
 const Students = () => {
   return (
     <Container className='h-100 d-flex flex-column align-items-start justify-content-center'>

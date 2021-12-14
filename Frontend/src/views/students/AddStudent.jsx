@@ -3,6 +3,17 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+/**
+ * Implement the add student interaction.
+ * 
+ * The model is limited to:
+ * {
+ *  firstName: string,
+ *  lastName: string,
+ *  email: string,
+ *  program: string
+ * }
+ */
 const AddStudent = () => {
   return (
     <Container className='h-100 d-flex flex-column align-items-start justify-content-center'>

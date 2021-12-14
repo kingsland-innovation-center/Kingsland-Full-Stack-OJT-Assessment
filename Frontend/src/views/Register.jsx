@@ -5,6 +5,19 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+/**
+ * Implement the user registration functionality.
+ * 
+ * You may limit your model to:
+ * {
+ *  firstName: string,
+ *  lastName: string,
+ *  username: string,
+ *  password: string,
+ * }
+ * 
+ * Make sure to observe good password storage practices (eg. hashing).
+ */
 const Register = () => {
   return (
     <Container className='h-100 d-flex flex-column align-items-center justify-content-center'>

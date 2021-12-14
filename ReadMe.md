@@ -4,6 +4,19 @@
 
 This repository contains the preset codebase for the Full Stack OJT assessment.
 
+# Structure
+
+## Frontend
+The frontend is built with ReactJS (Vanilla JS) and is found on the `/Frontend` folder.
+
+Use `npm start` to launch the project and it will be hosted on [http://localhost:3000](http://localhost:3000).
+
+## Backend
+The backend is built with Javascript (Vanilla JS, Express) and is found on the `/Backend` folder.
+
+Use `npm start` to launch the project and it will be hosted on [http://localhost:3100](http://localhost:3100).
+
+
 # The Assessment
 
 You have the technical freedom to install any libraries that you deem fit for the tasks.
