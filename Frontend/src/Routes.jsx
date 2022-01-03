@@ -8,10 +8,12 @@ import {
   Students,
 } from './views';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NavBar from './components/NavBar';
 
 const AppRoutes = () => {
   return (
     <Router>
+      <NavBar />
       <Routes>
         <Route exact path='/' element={<Welcome />} />.
         <Route path='/login' element={<Login />} />

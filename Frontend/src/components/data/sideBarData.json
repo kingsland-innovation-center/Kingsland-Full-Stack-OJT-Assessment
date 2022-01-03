@@ -1,0 +1,52 @@
+{
+  "unauthenticated": {
+    "menu": [
+      {
+        "label": "Home",
+        "path": "/"
+      }
+    ],
+    "auth" : [
+      {
+        "label": "Register",
+        "path": "/register"
+      },
+      {
+        "label": "Login",
+        "path": "/login"
+      }
+    ]
+  },
+    
+  
+  "authenticated" : {
+    "menu": [
+      {
+        "label": "",
+        "path": ""
+      }, 
+      {
+        "label": "Dashboard",
+        "path": "/dashboard"
+      },
+      {
+        "label": "Students",
+        "path": ""
+      }, 
+      {
+        "label": "List",
+        "path": "/students"
+      }, 
+      {
+        "label": "Add Students",
+        "path": "/students/add"
+      }
+    ],
+    "auth" : [
+      {
+        "label": "Logout",
+        "path": "/logout"
+      }
+    ]  
+  }
+}

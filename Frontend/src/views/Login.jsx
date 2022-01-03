@@ -19,7 +19,7 @@ import Button from 'react-bootstrap/Button';
  */
 const Login = () => {
   return (
-    <Container className='h-100 d-flex flex-column align-items-center justify-content-center'>
+    <Container className='h-75 d-flex flex-column align-items-center justify-content-center'>
       <div className='white-wrap'>
         <h2>Login</h2>
         <Form>

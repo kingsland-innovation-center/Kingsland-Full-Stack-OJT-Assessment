@@ -1,0 +1,35 @@
+.navbar {
+    color: rgb(17, 16, 16);
+}
+
+.menu-bars {
+    margin-left: 2rem;
+    font-size: 2rem;
+    background: none;
+}
+
+.nav-menu {
+    background-color: #FFFF;
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    /* justify-content: center; */
+    position: fixed;
+    top: 0;
+    left: -100%;
+    transition: 850ms;
+}
+
+.nav-menu.active {
+    left: 0;
+    transition: 350ms;
+}
+
+
+.menu-item-breaker {
+    height: 100%;
+}
+
+.item:active {
+    background-color:rgb(17, 16, 16)
+}
