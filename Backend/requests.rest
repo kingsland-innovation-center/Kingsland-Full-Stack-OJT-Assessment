@@ -1,0 +1,49 @@
+POST  http://localhost:3100/user/login
+Content-Type: application/json
+
+{
+    "username" : "flowerpodd",
+    "password" : "kagwapa12"
+}
+
+####
+
+GET http://localhost:3100/user/
+
+
+####
+
+POST  http://localhost:3100/student/
+Content-Type: application/json
+
+{
+    "firstName" : "flowerpodd",
+    "lastName" : "kagwapa12",
+    "program" : "flowerpodd",
+    "email" : "kagwapa12"
+}
+
+
+####
+
+GET http://localhost:3100/student
+
+####
+
+GET http://localhost:3100/student/1
+
+###
+PATCH  http://localhost:3100/student/1
+Content-Type: application/json
+
+{
+    "firstName" : "flowerpoddAAA",
+    "lastName" : "kagwapa1SSS2",
+    "program" : "flowerpSSodd",
+    "email" : "kagwapaSS12"
+}
+
+
+####
+
+DELETE http://localhost:3100/student/1
