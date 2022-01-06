@@ -13,10 +13,12 @@ const pool = new Pool({
   port: process.env.PORT,
 });
 
+const authenticateToken = require("../auth");
+
 /**
  * Returns all students in the database.
  */
-router.get("/", (request, response) => {
+router.get("/", authenticateToken, (request, response) => {
   pool.query(
     "SELECT ID, students.first_name, students.last_name, students.program, students.email FROM students",
     (error, results) => {
@@ -33,7 +35,7 @@ router.get("/", (request, response) => {
 /**
  * Returns a single student in the database.
  */
-router.get("/:id", (request, response) => {
+router.get("/:id", authenticateToken, (request, response) => {
   const id = parseInt(request.params.id);
 
   pool.query(
@@ -53,7 +55,7 @@ router.get("/:id", (request, response) => {
 /**
  * Creates a student in the database and returns the created student object.
  */
-router.post("/", (request, response) => {
+router.post("/", authenticateToken, (request, response) => {
   const { firstName, lastName, program, email } = request.body;
 
   pool.query(
@@ -73,7 +75,7 @@ router.post("/", (request, response) => {
 /**
  * Deletes a student from the database and returns the deleted student object.
  */
-router.delete("/:id", (request, response) => {
+router.delete("/:id", authenticateToken, (request, response) => {
   const id = parseInt(request.params.id);
 
   pool.query("DELETE FROM students WHERE id = $1 ", [id], (error, result) => {
@@ -89,7 +91,7 @@ router.delete("/:id", (request, response) => {
 /**
  * Modifies a student in the database and returns the modified student object.
  */
-router.patch("/:id", (request, response) => {
+router.patch("/:id", authenticateToken, (request, response) => {
   const id = parseInt(request.params.id);
   const { firstName, lastName, program, email } = request.body;
 

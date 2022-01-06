@@ -16,7 +16,7 @@ const pool = new Pool({
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const authenticateToken = require('../auth')
+const authenticateToken = require("../auth");
 /**
  * Returns the user list.
  * Observe good security practices such as removing the password field
@@ -25,13 +25,7 @@ const authenticateToken = require('../auth')
  * If :id is given, the user with the given id will be returned.
  */
 
-
-router.get("/", authenticateToken , (request, response) => {
-    // jwt.verify(request.token, process.env.ACCESS_TOKEN_SECRET, (error, user) => {
-  //   if (error) return response.sendStatus(403);
-  //   request.username = user;
-  //   next();
-  // });
+router.get("/", authenticateToken, (request, response) => {
   pool.query(
     "SELECT ID, users.first_name, users.last_name, users.username FROM users",
     (error, results) => {
@@ -48,9 +42,8 @@ router.get("/", authenticateToken , (request, response) => {
 /**
  * Returns the user with the given id.
  */
-router.get("/:id", (request, response) => {
+router.get("/:id", authenticateToken, (request, response) => {
   const id = parseInt(request.params.id);
-
   pool.query(
     "SELECT ID, users.first_name, users.last_name, users.username FROM users WHERE id = $1",
     [id],
@@ -133,15 +126,10 @@ router.post("/login", async (request, response) => {
             const accessToken = jwt.sign(
               request.body,
               process.env.ACCESS_TOKEN_SECRET,
-              { expiresIn: "1m" }
-            );
-            const refreshToken = jwt.sign(
-              request.body,
-              process.env.REFRESH_TOKEN_SECRET
+              { expiresIn: "7days" }
             );
             response.json({
               accessToken: accessToken,
-              refreshToken: refreshToken,
             });
           } else {
             response.status(200).send("failed login");
