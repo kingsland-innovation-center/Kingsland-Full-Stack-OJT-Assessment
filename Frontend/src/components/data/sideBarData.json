@@ -3,17 +3,20 @@
     "menu": [
       {
         "label": "Home",
-        "path": "/"
+        "path": "/",
+        "key" : "home"
       }
     ],
     "auth" : [
       {
         "label": "Register",
-        "path": "/register"
+        "path": "/register",
+        "key" : "register"
       },
       {
         "label": "Login",
-        "path": "/login"
+        "path": "/login",
+        "key" : "login"
       }
     ]
   },
@@ -23,29 +26,37 @@
     "menu": [
       {
         "label": "",
-        "path": ""
+        "path": "",
+        "key" : "placeholder"
       }, 
       {
         "label": "Dashboard",
-        "path": "/dashboard"
+        "path": "/dashboard",
+        "key" : "dashboard"
       },
       {
         "label": "Students",
-        "path": ""
-      }, 
+        "path": "",
+        "key" : "students"
+      }
+    ],
+    "students": [
       {
         "label": "List",
-        "path": "/students"
+        "path": "/students",
+        "key" : "list"
       }, 
       {
         "label": "Add Students",
-        "path": "/students/add"
+        "path": "/students/add",
+        "key": "addStudents"
       }
     ],
     "auth" : [
       {
         "label": "Logout",
-        "path": "/logout"
+        "path": "/logout",
+        "key" : "logout"
       }
     ]  
   }

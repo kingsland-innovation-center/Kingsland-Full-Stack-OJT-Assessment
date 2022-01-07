@@ -30,6 +30,11 @@
     height: 100%;
 }
 
-.item:active {
-    background-color:rgb(17, 16, 16)
+.expand-logo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.item {
+    margin-left: 20px;
 }

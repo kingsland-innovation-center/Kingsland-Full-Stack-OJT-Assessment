@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Nav, ListGroup, Button } from "react-bootstrap";
+import { Nav, ListGroup, Collapse } from "react-bootstrap";
 import data from "./data/sideBarData.json";
 import "../styles/NavBar.css";
+import { isAuthPublicRoute } from "../routes/utils/authUtils";
+import PublicSideBar from "./PublicSideBar";
+import PrivateSideBar from "./PrivateSideBar";
 
 function NavBar() {
   const [sidebar, setSidebar] = useState(false);
+
   const navBarClass = sidebar ? "nav-menu active" : "nav-menu";
 
-  const sideBarLabels = data.unauthenticated;
+  const sideBarLabels = isAuthPublicRoute()
+    ? data.unauthenticated
+    : data.authenticated;
   const [activePage, setActivePage] = useState("");
-
-  console.log(activePage);
-  const showSidebar = () => {setSidebar(!sidebar);}
+  const showSidebar = () => {
+    setSidebar(!sidebar);
+  };
 
   return (
     <>
@@ -33,34 +39,20 @@ function NavBar() {
           <ListGroup.Item action href="#link1" onClick={showSidebar}>
             <i className="bi bi-list" style={{ fontSize: "2rem" }}></i>
           </ListGroup.Item>
-          {sideBarLabels.menu.map((item, index) => {
-            return (
-              <ListGroup.Item
-                key={index}
-                action
-                href={item.path}
-                className="item"
-                onClick={showSidebar}
-              >
-                {item.label}
-              </ListGroup.Item>
-            );
-          })}
-          <ListGroup.Item className="menu-item-breaker" />
-
-          {sideBarLabels.auth.map((item, index) => {
-            return (
-              <ListGroup.Item
-                key={index}
-                action
-                href={item.path}
-                className="item"
-                onClick={showSidebar}
-              >
-                {item.label}
-              </ListGroup.Item>
-            );
-          })}
+          {isAuthPublicRoute() ? (
+            <PublicSideBar
+              menu={sideBarLabels.menu}
+              auth={sideBarLabels.auth}
+              handleClick={showSidebar}
+            />
+          ) : (
+            <PrivateSideBar
+              menu={sideBarLabels.menu}
+              students={sideBarLabels.students}
+              auth={sideBarLabels.auth}
+              handleClick={showSidebar}
+            />
+          )}
         </ListGroup>
       </Nav>
     </>
