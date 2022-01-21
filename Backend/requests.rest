@@ -2,7 +2,19 @@ POST  http://localhost:3100/user/login
 Content-Type: application/json
 
 {
-    "username" : "flowerpodd",
+    "username" : "walasalaot",
+    "password" : "kagwapa12"
+}
+
+####
+
+POST  http://localhost:3100/user/register
+Content-Type: application/json
+
+{
+    "firstName" : "Eden",
+    "lastName" : "Rabanes",
+    "username" : "walasalaot",
     "password" : "kagwapa12"
 }
 

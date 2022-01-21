@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import AuthService from "../services/auth.service";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Implement the login functionality.
@@ -25,6 +26,7 @@ const initialValues = {
 };
 
 const Login = () => {
+  const navigate = useNavigate();
   const [inputValues, setInputValues] = useState(initialValues);
 
   const handleChange = (key) => (e) => {
@@ -41,6 +43,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     AuthService.login(inputValues.username, inputValues.password);
+    navigate("/dashboard");
   };
 
   return (

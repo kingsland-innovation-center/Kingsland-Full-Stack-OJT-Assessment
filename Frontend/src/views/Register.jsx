@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import AuthService from "../services/auth.service";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Implement the user registration functionality.
@@ -27,6 +28,7 @@ const initialValues = {
 };
 
 const Register = () => {
+  const navigate = useNavigate()
   const [inputValues, setInputValues] = useState(initialValues);
 
   const handleChange = (key) => (e) => {
@@ -49,7 +51,8 @@ const Register = () => {
       inputValues.password
     ).then(
       (response) => {
-        console.log(response.data.message);
+        console.log(response.id);
+        navigate('/dashboard')
       },
       (error) => {
         console.log(error.message);

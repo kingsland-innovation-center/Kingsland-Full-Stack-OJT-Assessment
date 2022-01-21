@@ -7,11 +7,24 @@ const authenticateToken = (request, response, next) => {
   if (token === null) return response.sendStatus(401)
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    console.log(err)
     if (err) return response.sendStatus(403)
     request.user = user
     next()
   })
 };
 
-module.exports = authenticateToken;
+const generateAccessToken = (request, response, result) => {
+  const accessToken = jwt.sign(request.body, process.env.ACCESS_TOKEN_SECRET, {
+    expiresIn: "7days",
+  });
+  return response.json({
+    accessToken: accessToken,
+    id: result.rows[0].id
+  });
+};
+
+
+module.exports = {
+  authenticateToken,
+  generateAccessToken
+}

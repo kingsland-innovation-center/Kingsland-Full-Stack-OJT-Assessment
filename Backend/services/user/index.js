@@ -16,7 +16,8 @@ const pool = new Pool({
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const authenticateToken = require("../auth");
+const auth = require("../auth");
+
 /**
  * Returns the user list.
  * Observe good security practices such as removing the password field
@@ -25,16 +26,16 @@ const authenticateToken = require("../auth");
  * If :id is given, the user with the given id will be returned.
  */
 
-router.get("/", authenticateToken, (request, response) => {
+router.get("/", auth.authenticateToken, (request, response) => {
   pool.query(
     "SELECT ID, users.first_name, users.last_name, users.username FROM users",
-    (error, results) => {
+    (error, result) => {
       if (error) {
         response.status(500).send({
           error: error,
         });
       }
-      response.status(200).json(results.rows);
+      response.status(200).json(result.rows);
     }
   );
 });
@@ -42,18 +43,23 @@ router.get("/", authenticateToken, (request, response) => {
 /**
  * Returns the user with the given id.
  */
-router.get("/:id", authenticateToken, (request, response) => {
+router.get("/:id", auth.authenticateToken, (request, response) => {
+  console.log(auth.authenticateToken);
   const id = parseInt(request.params.id);
   pool.query(
     "SELECT ID, users.first_name, users.last_name, users.username FROM users WHERE id = $1",
     [id],
-    (error, results) => {
+    (error, result) => {
       if (error) {
         response.status(500).send({
           error: error,
         });
       }
-      response.status(200).json(results.rows);
+      console.log(result.rows[0].username);
+      if (result.rows[0].username === request.user.username) {
+        return response.status(200).json(result.rows[0]);
+      }
+      return response.status(200).send("not allowed");
     }
   );
 });
@@ -71,10 +77,10 @@ router.post("/register", async (request, response) => {
       pool.query(
         `SELECT users.username FROM users WHERE users.username = $1`,
         [username],
-        function (error, results) {
-          if (results.rows.length < 1) {
+        function (error, result) {
+          if (result.rows.length < 1) {
             pool.query(
-              "INSERT INTO users (first_name, last_name, username, password) VALUES ($1, $2, $3, $4)",
+              "INSERT INTO users (first_name, last_name, username, password) VALUES ($1, $2, $3, $4) RETURNING id",
               [firstName, lastName, username, hashedPassword],
               (error, result) => {
                 if (error) {
@@ -82,7 +88,7 @@ router.post("/register", async (request, response) => {
                     error: error,
                   });
                 }
-                response.status(201).send("User is added");
+                auth.generateAccessToken(request, response, result);
               }
             );
           } else {
@@ -106,31 +112,24 @@ router.post("/login", async (request, response) => {
 
   if (username) {
     pool.query(
-      `SELECT users.username, users.password FROM users WHERE users.username = $1`,
+      `SELECT users.username, users.password, users.id FROM users WHERE users.username = $1`,
       [username],
-      async function (error, results) {
+      async function (error, result) {
         if (error) {
           response.status(500).send({
             error: error,
           });
         }
-        if (results.rowCount === 0) {
+        if (result.rowCount === 0) {
           return response.status(400).send("Cannot find user");
         }
         try {
           const compare = await bcrypt.compare(
             password,
-            results.rows[0].password
+            result.rows[0].password
           );
           if (compare) {
-            const accessToken = jwt.sign(
-              request.body,
-              process.env.ACCESS_TOKEN_SECRET,
-              { expiresIn: "7days" }
-            );
-            response.json({
-              accessToken: accessToken,
-            });
+            auth.generateAccessToken(request, response, result);
           } else {
             response.status(200).send("failed login");
           }
@@ -142,9 +141,6 @@ router.post("/login", async (request, response) => {
       }
     );
   }
-  //   response.status(500).send({
-  //     error: "Pending Implementations",
-  //   });
 });
 
 module.exports = router;

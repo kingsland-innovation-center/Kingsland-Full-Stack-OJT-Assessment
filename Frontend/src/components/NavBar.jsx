@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Nav, ListGroup, Collapse } from "react-bootstrap";
+import { Nav, ListGroup } from "react-bootstrap";
 import data from "./data/sideBarData.json";
 import "../styles/NavBar.css";
 import { isAuthPublicRoute } from "../routes/utils/authUtils";
-import PublicSideBar from "./PublicSideBar";
-import PrivateSideBar from "./PrivateSideBar";
+import PublicSideBar from "./Sidebar/PublicSideBar";
+import PrivateSideBar from "./Sidebar/PrivateSideBar";
 
 function NavBar() {
   const [sidebar, setSidebar] = useState(false);
@@ -36,9 +36,6 @@ function NavBar() {
         className="nav nav-pills"
       >
         <ListGroup className={navBarClass}>
-          <ListGroup.Item action href="#link1" onClick={showSidebar}>
-            <i className="bi bi-list" style={{ fontSize: "2rem" }}></i>
-          </ListGroup.Item>
           {isAuthPublicRoute() ? (
             <PublicSideBar
               menu={sideBarLabels.menu}

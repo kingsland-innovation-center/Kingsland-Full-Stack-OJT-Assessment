@@ -10,10 +10,13 @@
  * You may also opt to eliminate the database entirely and use in-memory storage.
  */
 const express = require("express");
+const cors = require("cors");
 const student = require("./services/student");
 const user = require("./services/user");
-
 const app = express();
+
+app.use(cors());
+
 app.use(express.json());
 app.use(express.urlencoded());
 

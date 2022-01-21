@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Nav, ListGroup, Collapse } from "react-bootstrap";
-import data from "./data/sideBarData.json";
-import "../styles/NavBar.css";
+import React from "react";
+import { ListGroup } from "react-bootstrap";
+import "../../styles/NavBar.css";
 
 function PublicSideBar({ menu, auth, handleClick }) {
   return (
     <>
+      <ListGroup.Item action href="#link1" onClick={handleClick}>
+        <i className="bi bi-list" style={{ fontSize: "2rem" }}></i>
+      </ListGroup.Item>
       {menu.map((item) => {
         return (
           <ListGroup.Item

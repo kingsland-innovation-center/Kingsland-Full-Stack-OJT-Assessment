@@ -25,11 +25,6 @@
   "authenticated" : {
     "menu": [
       {
-        "label": "",
-        "path": "",
-        "key" : "placeholder"
-      }, 
-      {
         "label": "Dashboard",
         "path": "/dashboard",
         "key" : "dashboard"
