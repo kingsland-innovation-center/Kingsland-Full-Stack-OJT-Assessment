@@ -7,21 +7,24 @@ import {
   AddStudent,
   Students,
 } from './views';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import DashboardLayout from './layouts/dashboard';
+import { useRoutes } from 'react-router-dom';
 
 const AppRoutes = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route exact path='/' element={<Welcome />} />.
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route exact path='/students' element={<Students />} />
-        <Route exact path='/students/add' element={<AddStudent />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-      </Routes>
-    </Router>
-  );
+  
+    return useRoutes([
+      {
+        path: '/',
+        element: <DashboardLayout />,
+        children: [
+          { path: 'welcome', element: <Welcome />},
+          { path: 'login', element: <Login /> },
+          { path: 'register', element: <Register /> },
+          { path: 'dashboard', element: <Dashboard /> },
+          { path: 'students', element: <Students /> },
+          { path: 'students/add', element: <AddStudent /> },
+        ]
+      },
+    ]);
 };
 export default AppRoutes;

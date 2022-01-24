@@ -1,7 +1,9 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import * as Yup from 'yup';
+import { useFormik, Form, FormikProvider } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import { Stack, Container, Box, Typography  } from '@mui/material';
+import { CustomTextField, CustomLoadingButton, CustomPasswordField } from '../components/common';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -18,54 +20,103 @@ import Col from 'react-bootstrap/Col';
  * 
  * Make sure to observe good password storage practices (eg. hashing).
  */
+
 const Register = () => {
+  const navigate = useNavigate();
+  const RegisterSchema = Yup.object().shape({
+    firstName: Yup.string().required('Firstname is required'),
+    lastName: Yup.string().required('Lastname is required'),
+    username: Yup.string().required('Please enter a username'),
+    password: Yup.string().required('Password is required')
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      username: '',
+      password: '',
+    },
+
+    validationSchema: RegisterSchema,
+    onSubmit: async (values, actions) => {
+
+      console.log("VALUES: ", values);
+
+      try {
+        const body = { 
+          firstName: values.firstName, 
+          lastName: values.lastName, 
+          username: values.username, 
+          password: values.password 
+        };
+        
+        await fetch('http://localhost:3100/user/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+
+        setTimeout(() => {
+          navigate('/login', { replace: true });
+        }, 2000);
+
+      } catch (err) {
+        console.log(err.message);
+      }
+    }
+  });
+
+  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
+
   return (
     <Container className='h-100 d-flex flex-column align-items-center justify-content-center'>
-      <div className='white-wrap d-flex'>
+      <div className='white-wrap d-flex' style={{boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.3)', padding: '35px', borderRadius: '15px'}}>
         <Row className='d-flex align-items-center'>
           <Col>
-            <h2>Register</h2>
-            <Form>
-              <Form.Group className='mb-3' controlId='formFirstName'>
-                <Form.Label>First Name</Form.Label>
-                <Form.Control type='text' placeholder='Enter First Name' />
-              </Form.Group>
+          
+            <Box sx={{ mb: 2.5 }}>
+              <Typography variant="h4" gutterBottom>
+                Register
+              </Typography>
+            </Box>
 
-              <Form.Group className='mb-3' controlId='formLastName'>
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control type='text' placeholder='Enter Last Name' />
-              </Form.Group>
+            <FormikProvider value={formik}>
+              <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
+                <Stack spacing={3}>
+                
+                  <CustomTextField 
+                    label='First Name' 
+                    getfieldpropsfn={getFieldProps('firstName')}
+                    error={Boolean(touched.firstName && errors.firstName)} 
+                    helperText={touched.firstName && errors.firstName} 
+                  />
 
-              <Form.Group className='mb-3' controlId='formUsername'>
-                <Form.Label>Username</Form.Label>
-                <Form.Control type='text' placeholder='Enter Username' />
-              </Form.Group>
+                  <CustomTextField 
+                    label='Last Name' 
+                    getfieldpropsfn={getFieldProps('lastName')}
+                    error={Boolean(touched.lastName && errors.lastName)}
+                    helperText={touched.lastName && errors.lastName} 
+                  />
 
-              <Form.Group className='mb-3' controlId='formPassword'>
-                <Form.Label>Password</Form.Label>
-                <Form.Control type='password' placeholder='Password' />
-              </Form.Group>
+                  <CustomTextField 
+                    label='Username' 
+                    getfieldpropsfn={getFieldProps('username')}
+                    error={Boolean(touched.username && errors.username)}
+                    helperText={touched.username && errors.username} 
+                  />
 
-              <Button variant='primary' type='submit'>
-                Login
-              </Button>
-            </Form>
-          </Col>
-          <Col>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu sem
-            id neque auctor interdum a in enim. Phasellus mollis dapibus quam
-            commodo eleifend. Phasellus eu nibh sapien. Donec aliquet sem nec
-            lorem condimentum ultricies. Ut vulputate aliquam turpis non pretium.
-            Nulla leo arcu, bibendum vel lorem quis, sodales laoreet ante. Duis
-            sit amet lectus porttitor, faucibus metus sed, elementum arcu. Cras
-            quis nisl elementum felis malesuada tristique eu sit amet arcu. Nam
-            velit lacus, sagittis eget diam ut, interdum blandit dui. Duis leo mi,
-            tincidunt a consequat vel, mollis vel nisl. Ut ultrices malesuada sem
-            quis lacinia. Aliquam porta ut ligula ut eleifend. Etiam tempus mauris
-            sit amet erat sodales fermentum id sed sapien. Phasellus vitae
-            condimentum magna, sed congue est. Vivamus tincidunt interdum mauris
-            sit amet vulputate. Vestibulum viverra tincidunt sapien, vitae semper
-            nunc blandit vel.
+                  <CustomPasswordField 
+                    getfieldpropsfn={getFieldProps('password')}
+                    error={Boolean(touched.password && errors.password)} 
+                    helperText={touched.password && errors.password}
+                  />
+
+                  <CustomLoadingButton label={'Register'} loading={isSubmitting} />
+
+                </Stack>
+              </Form>
+            </FormikProvider>
           </Col>
         </Row>
       </div>
