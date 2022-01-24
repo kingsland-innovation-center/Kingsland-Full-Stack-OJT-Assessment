@@ -1,0 +1,11 @@
+{
+  "delete": {
+    "message" : "Delete student data?"
+  },
+  "edit": {
+    "message" : "Confirm changes in student data?"
+  },
+  "add": {
+    "message" : "Add new student data?"
+  }
+}

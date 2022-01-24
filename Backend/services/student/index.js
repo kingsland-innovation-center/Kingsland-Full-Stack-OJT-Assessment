@@ -20,7 +20,7 @@ const auth = require("../auth");
  */
 router.get("/", auth.authenticateToken, (request, response) => {
   pool.query(
-    "SELECT ID, students.first_name, students.last_name, students.program, students.email FROM students",
+    "SELECT ID, students.firstname, students.lastname, students.program, students.email FROM students",
     (error, results) => {
       if (error) {
         response.status(500).send({
@@ -39,7 +39,7 @@ router.get("/:id", auth.authenticateToken, (request, response) => {
   const id = parseInt(request.params.id);
 
   pool.query(
-    "SELECT ID, students.first_name, students.last_name, students.program, students.email FROM students  WHERE id = $1",
+    "SELECT ID, students.firstname, students.lastname, students.program, students.email FROM students  WHERE id = $1",
     [id],
     (error, results) => {
       if (error) {
@@ -47,7 +47,7 @@ router.get("/:id", auth.authenticateToken, (request, response) => {
           error: error,
         });
       }
-      response.status(200).json(results.rows);
+      response.status(200).json(results.rows[0]);
     }
   );
 });
@@ -59,7 +59,7 @@ router.post("/", auth.authenticateToken, (request, response) => {
   const { firstName, lastName, program, email } = request.body;
 
   pool.query(
-    "INSERT INTO students (first_name, last_name, program, email) VALUES ($1, $2, $3, $4)",
+    "INSERT INTO students (firstname, lastname, program, email) VALUES ($1, $2, $3, $4)",
     [firstName, lastName, program, email],
     (error, result) => {
       if (error) {
@@ -96,7 +96,7 @@ router.patch("/:id", auth.authenticateToken, (request, response) => {
   const { firstName, lastName, program, email } = request.body;
 
   pool.query(
-    "UPDATE students SET first_name = $1, last_name = $2, program = $3, email = $4 WHERE id = $5",
+    "UPDATE students SET firstname = $1, lastname = $2, program = $3, email = $4 WHERE id = $5",
     [firstName, lastName, program, email, id],
     (error, result) => {
       if (error) {
@@ -104,7 +104,7 @@ router.patch("/:id", auth.authenticateToken, (request, response) => {
           error: error,
         });
       }
-      response.status(201).send("Student details changed");
+      response.status(201).send(result.rows[0]);
     }
   );
 });

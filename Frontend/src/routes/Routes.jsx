@@ -40,8 +40,8 @@ const AppRoutes = () => {
           <Route exact path="/students/add" element={<AddStudent />} />{" "}
         </Route>
 
-        <Route exact path="/students/edit" element={<PrivateRoute />}>
-          <Route exact path="/students/edit" element={<EditStudent />} />{" "}
+        <Route exact path="/students/edit/:id" element={<PrivateRoute />}>
+          <Route exact path="/students/edit/:id" element={<EditStudent />} />{" "}
         </Route>
       </Routes>
     </Router>

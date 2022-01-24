@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import Interaction from "../../components/StudentInteraction/Interaction";
 import StudentService from "../../services/student.service";
-import EditStudent from "./EditStudent";
+import data from "../../components/data/modalMessage.json";
 
 /**
  * Implement the read students information.
@@ -20,10 +20,11 @@ import EditStudent from "./EditStudent";
 const Students = () => {
   const [students, setStudents] = useState([]);
 
+
   useEffect(() => {
     StudentService.getAllStudents().then((response) => setStudents(response));
-    console.log(students);
-  }, []);
+  }, [students]);
+
   return (
     <Container className="h-100 d-flex flex-column align-items-start justify-content-center">
       <div className="white-wrap w-100">
@@ -42,7 +43,7 @@ const Students = () => {
               return (
                 <tr key={student.id}>
                   <td>
-                    {student.first_name} {student.last_name}
+                    {student.firstname} {student.lastname}
                   </td>
                   <td>{student.program}</td>
                   <td>{student.email}</td>

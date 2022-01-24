@@ -28,7 +28,7 @@ const auth = require("../auth");
 
 router.get("/", auth.authenticateToken, (request, response) => {
   pool.query(
-    "SELECT ID, users.first_name, users.last_name, users.username FROM users",
+    "SELECT ID, users.firstname, users.lastname, users.username FROM users",
     (error, result) => {
       if (error) {
         response.status(500).send({
@@ -47,7 +47,7 @@ router.get("/:id", auth.authenticateToken, (request, response) => {
   console.log(auth.authenticateToken);
   const id = parseInt(request.params.id);
   pool.query(
-    "SELECT ID, users.first_name, users.last_name, users.username FROM users WHERE id = $1",
+    "SELECT ID, users.firstname, users.lastname, users.username FROM users WHERE id = $1",
     [id],
     (error, result) => {
       if (error) {
@@ -80,7 +80,7 @@ router.post("/register", async (request, response) => {
         function (error, result) {
           if (result.rows.length < 1) {
             pool.query(
-              "INSERT INTO users (first_name, last_name, username, password) VALUES ($1, $2, $3, $4) RETURNING id",
+              "INSERT INTO users (firstname, lastname, username, password) VALUES ($1, $2, $3, $4) RETURNING id",
               [firstName, lastName, username, hashedPassword],
               (error, result) => {
                 if (error) {

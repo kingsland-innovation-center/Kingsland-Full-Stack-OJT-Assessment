@@ -13,8 +13,8 @@ function PrivateSideBar({ menu, students, auth, handleClick }) {
 
   useEffect(() => {
     UserService.getCurrentUser().then((response) => {
-      const firstName = response.first_name;
-      const lastName = response.last_name;
+      const firstName = response.firstname;
+      const lastName = response.lastname;
       setFullName(`${firstName} ${lastName}`);
       setInitals(
         `${firstName.charAt(0).toUpperCase()}${lastName

@@ -4,24 +4,40 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Button from "react-bootstrap/Button";
 import { ListGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-
-import EditStudent from "../../views/students/EditStudent";
+import data from "../data/modalMessage.json";
+import InteractionModal from "../InteractionModal";
+import StudentService from "../../services/student.service";
 
 function Interaction(props) {
-  const navigate = useNavigate();
+  const id = props.id;
+  const modalMessage = data.delete.message;
 
-  const id = props.id
   const [show, setShow] = useState(false);
+
+  const handleShow = () => {
+    setShow(true);
+  };
+
+  const handleConfirm = () => {
+    StudentService.deleteStudent(id)
+    setShow(!show)
+  }
 
   const popover = (
     <Popover id="popover-basic">
       <ListGroup>
-        <ListGroup.Item action href="/students/edit">
+        <ListGroup.Item action href={`/students/edit/${id}`}>
           Edit
         </ListGroup.Item>
-        <ListGroup.Item action href="#link2">
+        <ListGroup.Item action onClick={handleShow}>
           Delete
         </ListGroup.Item>
+        <InteractionModal
+            showModal={show}
+            setShowModal={setShow}
+            confirmModal={handleConfirm}
+            message={modalMessage}
+          />
       </ListGroup>
     </Popover>
   );
