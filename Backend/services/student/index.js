@@ -67,7 +67,7 @@ router.post("/", auth.authenticateToken, (request, response) => {
           error: error,
         });
       }
-      response.status(201).send("Student is added");
+      response.status(201).send(result.rows[0]);
     }
   );
 });

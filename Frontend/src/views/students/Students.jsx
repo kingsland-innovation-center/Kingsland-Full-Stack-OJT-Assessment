@@ -1,10 +1,13 @@
-import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Table from 'react-bootstrap/Table';
+import React, { useEffect, useState } from "react";
+import Container from "react-bootstrap/Container";
+import Table from "react-bootstrap/Table";
+import Interaction from "../../components/StudentInteraction/Interaction";
+import StudentService from "../../services/student.service";
+import EditStudent from "./EditStudent";
 
 /**
  * Implement the read students information.
- * 
+ *
  * The model definition is:
  * [{
  *  firstName: string,
@@ -13,10 +16,17 @@ import Table from 'react-bootstrap/Table';
  *  program: string
  * }]
  */
+
 const Students = () => {
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    StudentService.getAllStudents().then((response) => setStudents(response));
+    console.log(students);
+  }, []);
   return (
-    <Container className='h-100 d-flex flex-column align-items-start justify-content-center'>
-      <div className='white-wrap w-100'>
+    <Container className="h-100 d-flex flex-column align-items-start justify-content-center">
+      <div className="white-wrap w-100">
         <h2>Students</h2>
         <Table striped bordered hover>
           <thead>
@@ -24,9 +34,24 @@ const Students = () => {
               <th>Name</th>
               <th>Program</th>
               <th>Email</th>
+              <th />
             </tr>
           </thead>
           <tbody>
+            {students.map((student) => {
+              return (
+                <tr key={student.id}>
+                  <td>
+                    {student.first_name} {student.last_name}
+                  </td>
+                  <td>{student.program}</td>
+                  <td>{student.email}</td>
+                  <td>
+                    <Interaction id={student.id}/>
+                  </td>
+                </tr>
+              );
+            })}
             <tr>
               <td>Sean Cadubla</td>
               <td>Zero-to-Blockchain Program</td>
