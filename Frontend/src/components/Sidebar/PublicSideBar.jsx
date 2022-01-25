@@ -6,7 +6,7 @@ function PublicSideBar({ menu, auth, handleClick }) {
   return (
     <>
       <ListGroup.Item action onClick={handleClick}>
-        <i className="bi bi-list" style={{ fontSize: "2rem" }}></i>
+        <i className="bi bi-list" style={{ fontSize: "2rem", color: "#4b5a6c" }}></i>
       </ListGroup.Item>
       {menu.map((item) => {
         return (

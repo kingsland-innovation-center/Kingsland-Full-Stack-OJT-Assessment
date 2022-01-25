@@ -27,7 +27,7 @@ function NavBar() {
         <Link to="#" className="menu-bars" onClick={showSidebar}>
           <i
             className="bi bi-list"
-            style={{ fontSize: "2rem", color: "gray" }}
+            style={{ fontSize: "2rem", color: "#4b5a6c" }}
           ></i>
         </Link>
       </div>

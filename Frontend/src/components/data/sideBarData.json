@@ -42,7 +42,7 @@
         "key" : "list"
       }, 
       {
-        "label": "Add Students",
+        "label": "Add Student",
         "path": "/students/add",
         "key": "addStudents"
       }

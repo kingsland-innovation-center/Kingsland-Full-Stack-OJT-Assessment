@@ -13,34 +13,26 @@ function PrivateSideBar({ menu, students, auth, handleClick }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const [initials, setInitals] = useState("");
-
   useEffect(() => {
-    UserService.getCurrentUser()
-      .then((response) => {
-        setFirstName(response.firstname);
-        setLastName(response.lastname);
-      })
-      .then(() =>
-        setInitals(
-          `${firstName.charAt(0).toUpperCase()}${lastName
-            .charAt(0)
-            .toUpperCase()}`
-        )
-      );
+    UserService.getCurrentUser().then((response) => {
+      setFirstName(response.firstname);
+      setLastName(response.lastname);
+    });
   });
-  
+
   return (
     <>
       <ListGroup.Item>
         <Link to="#" onClick={handleClick}>
           <i
             className="bi bi-list"
-            style={{ fontSize: "2rem", color: "gray" }}
+            style={{ fontSize: "2rem", color: "#4b5a6c" }}
           ></i>
         </Link>
         <div className="container">
-          <div className="holder">{initials}</div>
+          <div className="holder">
+            <i class="bi bi-image-fill"></i>
+          </div>
           <div className="name">
             {firstName} {lastName}
           </div>
