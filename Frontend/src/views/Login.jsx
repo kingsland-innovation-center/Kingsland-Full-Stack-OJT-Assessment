@@ -42,8 +42,9 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    AuthService.login(inputValues.username, inputValues.password);
-    navigate("/dashboard");
+    AuthService.login(inputValues.username, inputValues.password).then(() =>
+      navigate("/dashboard")
+    );
   };
 
   return (

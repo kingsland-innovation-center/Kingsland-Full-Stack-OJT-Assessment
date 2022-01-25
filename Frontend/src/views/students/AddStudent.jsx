@@ -28,7 +28,7 @@ const initialValues = {
 };
 
 const AddStudent = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [inputValues, setInputValues] = useState(initialValues);
 
   const handleChange = (key) => (value) => {
@@ -52,8 +52,7 @@ const AddStudent = () => {
       inputValues.lastName,
       inputValues.program,
       inputValues.email
-    ).then((response) => console.log(response));
-    setTimeout(() => history("/students"), 1000);
+    ).then(() => setTimeout(() => navigate("/students"), 1000));
   };
 
   const handleSubmit = (e) => {

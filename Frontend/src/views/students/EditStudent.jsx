@@ -16,7 +16,7 @@ const initialValues = {
 };
 
 const EditStudent = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const params = useParams();
 
@@ -26,7 +26,7 @@ const EditStudent = () => {
     StudentService.getStudent(params.id).then((response) => {
       setInputValues(response);
     });
-  }, []);
+  });
 
   // console.log(inputValues);
   const handleChange = (key) => (value) => {
@@ -51,8 +51,7 @@ const EditStudent = () => {
       inputValues.lastname,
       inputValues.program,
       inputValues.email
-    );
-    setTimeout(() => history("/students"), 1000);
+    ).then(() => setTimeout(() => navigate("/students"), 1000));
   };
 
   const handleSubmit = (e) => {

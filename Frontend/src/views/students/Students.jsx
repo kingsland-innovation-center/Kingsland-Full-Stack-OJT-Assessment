@@ -20,7 +20,6 @@ import data from "../../components/data/modalMessage.json";
 const Students = () => {
   const [students, setStudents] = useState([]);
 
-
   useEffect(() => {
     StudentService.getAllStudents().then((response) => setStudents(response));
   }, [students]);

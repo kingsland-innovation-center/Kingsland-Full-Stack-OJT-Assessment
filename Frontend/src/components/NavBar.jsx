@@ -20,6 +20,7 @@ function NavBar() {
     setSidebar(!sidebar);
   };
 
+  console.log(isAuthPublicRoute())
   return (
     <>
       <div className="navbar">

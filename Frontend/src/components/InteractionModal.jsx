@@ -13,7 +13,7 @@ function InteractionModal(props) {
     <>
       <Modal show={showModal}>
         <Modal.Body>
-          <p>{message}</p>
+          <p style={{alignItems: 'center'}}>{message}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

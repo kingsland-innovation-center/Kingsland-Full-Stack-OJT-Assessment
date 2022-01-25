@@ -1,29 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { ListGroup, Collapse } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/NavBar.css";
 import AuthService from "../../services/auth.service";
 import UserService from "../../services/user.service";
 
 function PrivateSideBar({ menu, students, auth, handleClick }) {
+  const navigate = useNavigate();
+
   const [openCollapsible, setOpenCollapsible] = useState(false);
 
-  const [fullName, setFullName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
   const [initials, setInitals] = useState("");
 
   useEffect(() => {
-    UserService.getCurrentUser().then((response) => {
-      const firstName = response.firstname;
-      const lastName = response.lastname;
-      setFullName(`${firstName} ${lastName}`);
-      setInitals(
-        `${firstName.charAt(0).toUpperCase()}${lastName
-          .charAt(0)
-          .toUpperCase()}`
+    UserService.getCurrentUser()
+      .then((response) => {
+        setFirstName(response.firstname);
+        setLastName(response.lastname);
+      })
+      .then(() =>
+        setInitals(
+          `${firstName.charAt(0).toUpperCase()}${lastName
+            .charAt(0)
+            .toUpperCase()}`
+        )
       );
-    });
-  }, []);
-
+  });
+  
   return (
     <>
       <ListGroup.Item>
@@ -35,7 +41,9 @@ function PrivateSideBar({ menu, students, auth, handleClick }) {
         </Link>
         <div className="container">
           <div className="holder">{initials}</div>
-          <div className="name">{fullName}</div>
+          <div className="name">
+            {firstName} {lastName}
+          </div>
         </div>
       </ListGroup.Item>
 
@@ -92,7 +100,9 @@ function PrivateSideBar({ menu, students, auth, handleClick }) {
 
       {auth.map((item) => {
         if (item.label === "Logout") {
-          handleClick = () => AuthService.logout();
+          handleClick = () => {
+            AuthService.logout().then(() => navigate("/"));
+          };
           return (
             <ListGroup.Item
               key={item.key}

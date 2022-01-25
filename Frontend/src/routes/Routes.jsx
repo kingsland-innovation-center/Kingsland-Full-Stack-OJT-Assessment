@@ -26,7 +26,9 @@ const AppRoutes = () => {
           <Route exact path="/login" element={<Login />} />
         </Route>
 
-        <Route path="/register" element={<Register />} />
+        <Route exact path="/register" element={<PublicRoute />}>
+          <Route path="/register" element={<Register />} />{" "}
+        </Route>
 
         <Route exact path="/dashboard" element={<PrivateRoute />}>
           <Route exact path="/dashboard" element={<Dashboard />} />
