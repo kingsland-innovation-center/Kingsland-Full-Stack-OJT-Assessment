@@ -3,7 +3,6 @@ import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Button from "react-bootstrap/Button";
 import { ListGroup } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import data from "../data/modalMessage.json";
 import InteractionModal from "../InteractionModal";
 import StudentService from "../../services/student.service";
@@ -42,7 +41,7 @@ function Interaction(props) {
     </Popover>
   );
   return (
-    <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+    <OverlayTrigger trigger="click" rootClose placement="right" overlay={popover}>
       <Button variant="link">
         <i className="bi bi-three-dots-vertical" style={{ color: "gray" }}></i>
       </Button>

@@ -50,7 +50,7 @@
     "auth" : [
       {
         "label": "Logout",
-        "path": "/logout",
+        "path": "/",
         "key" : "logout"
       }
     ]  

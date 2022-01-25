@@ -3,7 +3,6 @@ import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import Interaction from "../../components/StudentInteraction/Interaction";
 import StudentService from "../../services/student.service";
-import data from "../../components/data/modalMessage.json";
 
 /**
  * Implement the read students information.
@@ -46,8 +45,8 @@ const Students = () => {
                   </td>
                   <td>{student.program}</td>
                   <td>{student.email}</td>
-                  <td>
-                    <Interaction id={student.id}/>
+                  <td className="d-flex flex-column">
+                    <Interaction id={student.id} />
                   </td>
                 </tr>
               );

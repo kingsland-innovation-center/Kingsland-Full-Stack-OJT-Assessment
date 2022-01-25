@@ -9,18 +9,18 @@ import PrivateSideBar from "./Sidebar/PrivateSideBar";
 
 function NavBar() {
   const [sidebar, setSidebar] = useState(false);
+  const [activePage, setActivePage] = useState("");
 
   const navBarClass = sidebar ? "nav-menu active" : "nav-menu";
 
   const sideBarLabels = isAuthPublicRoute()
     ? data.unauthenticated
     : data.authenticated;
-  const [activePage, setActivePage] = useState("");
+
   const showSidebar = () => {
     setSidebar(!sidebar);
   };
 
-  console.log(isAuthPublicRoute())
   return (
     <>
       <div className="navbar">

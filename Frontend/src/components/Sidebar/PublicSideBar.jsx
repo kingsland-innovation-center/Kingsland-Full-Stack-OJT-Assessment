@@ -5,7 +5,7 @@ import "../../styles/NavBar.css";
 function PublicSideBar({ menu, auth, handleClick }) {
   return (
     <>
-      <ListGroup.Item action href="#link1" onClick={handleClick}>
+      <ListGroup.Item action onClick={handleClick}>
         <i className="bi bi-list" style={{ fontSize: "2rem" }}></i>
       </ListGroup.Item>
       {menu.map((item) => {

@@ -38,8 +38,6 @@ const Register = () => {
       ...inputValues,
       [key]: value,
     });
-
-    console.log(inputValues);
   };
 
   const handleSubmit = (e) => {
@@ -50,8 +48,7 @@ const Register = () => {
       inputValues.username,
       inputValues.password
     ).then(
-      (response) => {
-        console.log(response.id);
+      () => {
         navigate('/dashboard')
       },
       (error) => {

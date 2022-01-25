@@ -29,7 +29,11 @@ const initialValues = {
 
 const AddStudent = () => {
   const navigate = useNavigate();
+
+  const modalMessage = data.add.message;
+
   const [inputValues, setInputValues] = useState(initialValues);
+  const [show, setShow] = useState(false);
 
   const handleChange = (key) => (value) => {
     setInputValues({
@@ -37,10 +41,6 @@ const AddStudent = () => {
       [key]: value,
     });
   };
-
-  const modalMessage = data.add.message;
-
-  const [show, setShow] = useState(false);
 
   const handleShow = () => {
     setShow(!show);

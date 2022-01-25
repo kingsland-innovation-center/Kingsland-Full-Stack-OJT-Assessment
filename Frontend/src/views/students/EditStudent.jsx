@@ -17,28 +17,26 @@ const initialValues = {
 
 const EditStudent = () => {
   const navigate = useNavigate();
-
   const params = useParams();
 
+  const id = params.id
+  const modalMessage = data.edit.message;
+
   const [inputValues, setInputValues] = useState(initialValues);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    StudentService.getStudent(params.id).then((response) => {
+    StudentService.getStudent(id).then((response) => {
       setInputValues(response);
     });
-  });
+  }, [id]);
 
-  // console.log(inputValues);
   const handleChange = (key) => (value) => {
-    console.log(inputValues);
     setInputValues({
       ...inputValues,
       [key]: value,
     });
   };
-  const modalMessage = data.edit.message;
-
-  const [show, setShow] = useState(false);
 
   const handleShow = () => {
     setShow(!show);

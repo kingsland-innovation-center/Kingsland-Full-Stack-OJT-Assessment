@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
@@ -11,9 +11,9 @@ function InteractionModal(props) {
 
   return (
     <>
-      <Modal show={showModal}>
+      <Modal centered show={showModal} onHide={handleClose}>
         <Modal.Body>
-          <p style={{alignItems: 'center'}}>{message}</p>
+          <p style={{justifyContent: 'center'}}>{message}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

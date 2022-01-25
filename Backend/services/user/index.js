@@ -55,7 +55,6 @@ router.get("/:id", auth.authenticateToken, (request, response) => {
           error: error,
         });
       }
-      console.log(result.rows[0].username);
       if (result.rows[0].username === request.user.username) {
         return response.status(200).json(result.rows[0]);
       }
@@ -78,6 +77,11 @@ router.post("/register", async (request, response) => {
         `SELECT users.username FROM users WHERE users.username = $1`,
         [username],
         function (error, result) {
+          if (error) {
+            response.status(500).send({
+              error: error,
+            });
+          }
           if (result.rows.length < 1) {
             pool.query(
               "INSERT INTO users (firstname, lastname, username, password) VALUES ($1, $2, $3, $4) RETURNING id",

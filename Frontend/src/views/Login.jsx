@@ -36,8 +36,6 @@ const Login = () => {
       ...inputValues,
       [key]: value,
     });
-
-    console.log(inputValues);
   };
 
   const handleSubmit = (e) => {
