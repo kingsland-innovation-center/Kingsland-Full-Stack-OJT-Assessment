@@ -23,7 +23,7 @@ router.get('/', async (request, response) => {
         userId, 
         firstname, 
         lastname, 
-        username, 
+        username
       FROM 
         users`, 
       [], response);

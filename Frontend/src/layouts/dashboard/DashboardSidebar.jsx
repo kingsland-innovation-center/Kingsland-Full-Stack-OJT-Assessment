@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Button, Drawer} from '@mui/material';
@@ -73,7 +73,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -99,11 +99,22 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   useEffect(() => {
     const path = window.location.pathname;
 
-    {(path.includes('dashboard') || path.includes('students')) && isAuthPublicRoute() ? (
+    if (
+      (
+        path.includes('dashboard') || 
+        path.includes('students')
+      ) && isAuthPublicRoute()) {
       navigate('/', {replace: true})
-    ): (
+    } else if (
+      (
+        path.includes('login') || 
+        path.includes('welcome') || 
+        path.includes('register')
+      ) && isAuthPrivateRoute()) {
+      navigate('/dashboard', {replace: true})
+    } else {
       navigate(`${path}`, {replace: true})
-    )}
+    }
   }, [])
 
   const renderContent = (
