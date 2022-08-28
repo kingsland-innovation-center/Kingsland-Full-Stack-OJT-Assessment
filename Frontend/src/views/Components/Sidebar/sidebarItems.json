@@ -1,0 +1,52 @@
+[
+  {
+    "authenticated": false,
+    "menuItem": [
+      {
+        "title": "Home",
+        "subitem": [],
+        "path": "/"
+      }
+    ],
+    "footer": [
+      {
+        "title": "Login",
+        "path": "/login"
+      },
+      {
+        "title": "Register",
+        "path": "/register"
+      }
+    ]
+  },
+  {
+    "authenticated": true,
+    "menuItem": [
+      {
+        "title": "Dashboard",
+        "subitem": [],
+        "path": "/dashboard"
+      },
+      {
+        "title": "Students",
+        "subitem": [
+          {
+            "title": "List",
+            "path": "/students"
+          },
+          {
+            "title": "Add Students",
+            "path": "/students/add"
+          }
+        ],
+        "path": ""
+      }
+    ],
+    "footer": [
+      {
+        "title": "Logout",
+        "path": "/login"
+      }
+    ]
+  }
+]
