@@ -45,7 +45,7 @@
     "footer": [
       {
         "title": "Logout",
-        "path": "/login"
+        "path": "/"
       }
     ]
   }
