@@ -7,38 +7,29 @@ import {
   AddStudent,
   Students,
 } from './views';
-import Sidebar from './views/Components/Sidebar/Sidebar';
-import { Row, Col } from 'react-bootstrap';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Outlet,
-} from 'react-router-dom';
-
-const SidebarLayout = () => {
-  return (
-    <Row style={{ height: '100%' }}>
-      <Sidebar />
-      <Col style={{ width: '100%' }}>
-        <Outlet />
-      </Col>
-    </Row>
-  );
-};
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import SidebarLayout from './views/Components/Sidebar/SidebarLayout';
+import PrivateRoute from './PrivateRoute';
 
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        {/* <Route path='/dashboard' element={<Dashboard />} /> */}
-        <Route exact path='/' element={<Welcome />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
         <Route element={<SidebarLayout />}>
-          <Route path='/dashboard' element={<Dashboard />} />
+          <Route
+            exact
+            path='/dashboard'
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
           <Route exact path='/students' element={<Students />} />
           <Route exact path='/students/add' element={<AddStudent />} />
+          <Route exact path='/' element={<Welcome />} />
         </Route>
       </Routes>
     </Router>

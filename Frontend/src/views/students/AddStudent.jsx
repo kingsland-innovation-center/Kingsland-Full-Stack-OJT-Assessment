@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 /**
  * Implement the add student interaction.
@@ -23,6 +24,9 @@ const AddStudent = () => {
     email: '',
     program: '',
   });
+  if (!Cookies.get('user_name')) {
+    return <Navigate to='/' />;
+  }
 
   const onFirstNameChange = (input) => {
     setStudentFormInput({

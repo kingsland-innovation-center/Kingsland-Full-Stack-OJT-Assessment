@@ -4,8 +4,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 /**
  * Implement the user registration functionality.
@@ -29,6 +30,10 @@ const Register = () => {
     username: '',
     password: '',
   });
+
+  if (Cookies.get('user_name')) {
+    return <Navigate to='/dashboard' />;
+  }
 
   const onFirstNameChange = (input) => {
     setRegistrationInput({

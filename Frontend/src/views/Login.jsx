@@ -2,9 +2,10 @@ import React, { useState, useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { sidebarContext } from './Components/Sidebar/SidebarContext';
+import Cookies from 'js-cookie';
 
 /**
  * Implement the login functionality.
@@ -29,6 +30,10 @@ const Login = () => {
     username: '',
     password: '',
   });
+
+  if (Cookies.get('user_name')) {
+    return <Navigate to='/dashboard' />;
+  }
 
   const onUsernameChange = (input) => {
     setLoginInput({
@@ -55,6 +60,10 @@ const Login = () => {
       .then((response) => {
         if (response.data.isUserValid) {
           sidebar.setIsUserAuthenticated(true);
+          Cookies.set(
+            'user_name',
+            `${response.data.user.firstname} ${response.data.user.lastname}`
+          );
         }
       })
       .then(() => {

@@ -12,16 +12,24 @@ import {
 } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col } from 'react-bootstrap';
+import { sidebarContext } from './SidebarContext';
+import Cookies from 'js-cookie';
 
 const menuItem = require('./sidebarItems.json');
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   const [isOpen, setOpen] = useState(false);
+  const sidebar = useContext(sidebarContext);
+  const userName = Cookies.get('user_name');
 
-  const authenticatedUser = true;
+  const authenticatedUser = sidebar.isUserAuthenticated;
   const menuItems = menuItem.find((item) => {
     return item.authenticated === authenticatedUser;
   });
+
+  const handleLogout = () => {
+    Cookies.remove('user_name');
+  };
 
   const imgUrl =
     'https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png';
@@ -72,7 +80,7 @@ const Sidebar = () => {
                   />
                 </Col>
                 <Col style={{ justifyContent: 'flex-start' }}>
-                  <Card.Text>James Ivan Suminguit</Card.Text>
+                  <Card.Text>{userName}</Card.Text>
                 </Col>
               </Row>
             </SidebarHeader>
@@ -113,7 +121,13 @@ const Sidebar = () => {
             {menuItems.footer.map((item) => {
               return (
                 <Menu>
-                  <MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      if (item.title === 'Logout') {
+                        handleLogout();
+                      }
+                    }}
+                  >
                     <Link to={item.path}>{item.title}</Link>
                   </MenuItem>
                 </Menu>

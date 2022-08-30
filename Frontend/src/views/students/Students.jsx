@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 /**
  * Implement the read students information.
@@ -27,6 +29,9 @@ const Students = () => {
       });
   }, []);
 
+  if (!Cookies.get('user_name')) {
+    return <Navigate to='/' />;
+  }
   return (
     <Container className='h-100 d-flex flex-column align-items-start justify-content-center'>
       <div className='white-wrap w-100'>
