@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 import axios from 'axios';
+import { sidebarContext } from './Components/Sidebar/SidebarContext';
 
 /**
  * Implement the login functionality.
@@ -23,6 +23,7 @@ import axios from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
+  const sidebar = useContext(sidebarContext);
 
   const [loginInput, setLoginInput] = useState({
     username: '',
@@ -43,8 +44,6 @@ const Login = () => {
     });
   };
 
-  useEffect(() => {});
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -54,7 +53,12 @@ const Login = () => {
         password: loginInput.password,
       })
       .then((response) => {
-        if (response.data.isUserValid) navigate('/dashboard');
+        if (response.data.isUserValid) {
+          sidebar.setIsUserAuthenticated(true);
+        }
+      })
+      .then(() => {
+        navigate('/dashboard');
       })
       .catch((error) => {
         console.log(error);
