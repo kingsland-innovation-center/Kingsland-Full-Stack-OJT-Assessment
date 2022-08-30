@@ -10,7 +10,7 @@ import {
   SidebarFooter,
   SidebarContent,
 } from 'react-pro-sidebar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Card, Row, Col } from 'react-bootstrap';
 import { sidebarContext } from './SidebarContext';
 import Cookies from 'js-cookie';
@@ -18,6 +18,7 @@ import Cookies from 'js-cookie';
 const menuItem = require('./sidebarItems.json');
 
 const Sidebar = (props) => {
+  const navigate = useNavigate();
   const [isOpen, setOpen] = useState(false);
   const sidebar = useContext(sidebarContext);
   const userName = Cookies.get('user_name');
@@ -29,6 +30,8 @@ const Sidebar = (props) => {
 
   const handleLogout = () => {
     Cookies.remove('user_name');
+    navigate('/');
+    sidebar.setIsUserAuthenticated(Boolean(Cookies.get('user_name')));
   };
 
   const imgUrl =
@@ -61,7 +64,7 @@ const Sidebar = (props) => {
 
       {isOpen ? (
         <>
-          {authenticatedUser ? (
+          {userName ? (
             <SidebarHeader style={{ padding: '10px' }}>
               <Row style={{ alignItems: 'center', display: 'flex' }}>
                 <Col
@@ -136,9 +139,7 @@ const Sidebar = (props) => {
           </SidebarFooter>
         </>
       ) : (
-        async () => {
-          await (<div></div>);
-        }
+        <div></div>
       )}
     </ProSidebar>
   );
