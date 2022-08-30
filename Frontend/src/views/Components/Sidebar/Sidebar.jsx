@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import 'react-pro-sidebar/dist/css/styles.css';
 import Hamburger from 'hamburger-react';
 import {
@@ -11,45 +11,75 @@ import {
   SidebarContent,
 } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
+import { Card, Row, Col } from 'react-bootstrap';
 
 const menuItem = require('./sidebarItems.json');
 
 const Sidebar = () => {
   const [isOpen, setOpen] = useState(false);
-  const authenticatedUser = true; //for dev only
+
+  const authenticatedUser = true;
   const menuItems = menuItem.find((item) => {
     return item.authenticated === authenticatedUser;
   });
 
+  const imgUrl =
+    'https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png';
+
   return (
     <ProSidebar
-      collapsedWidth='60px'
       image={false}
       collapsed={!isOpen}
       toggled={true}
       breakPoint='xs'
       overflow='hidden'
       width='230px'
-      color='red'
       style={{
         padding: '0px',
       }}
     >
-      <SidebarHeader>
-        <div
-          style={{
-            whiteSpace: 'nowrap',
-            display: 'flex',
-            flexDirection: 'column',
-            // alignItems: `${isOpen ? 'flex-end' : 'flex-start'}`,
-            alignItems: 'flex-end',
-          }}
-        >
-          <Hamburger size={24} toggled={isOpen} toggle={setOpen} />
-        </div>
-      </SidebarHeader>
+      <div
+        style={{
+          whiteSpace: 'nowrap',
+          display: 'flex',
+          flexDirection: 'column',
+          // alignItems: `${isOpen ? 'flex-end' : 'flex-start'}`,
+          alignItems: 'flex-end',
+          borderBottom: '2px solid rgba(17, 17, 17, 0.2)',
+        }}
+      >
+        <Hamburger size={24} toggled={isOpen} toggle={setOpen} />
+      </div>
+
       {isOpen ? (
         <>
+          {authenticatedUser ? (
+            <SidebarHeader style={{ padding: '10px' }}>
+              <Row style={{ alignItems: 'center', display: 'flex' }}>
+                <Col
+                  style={{
+                    marginLeft: '10px',
+                    height: 'auto',
+                    maxWidth: '30%',
+                  }}
+                >
+                  <Card.Img
+                    src={imgUrl}
+                    style={{
+                      borderRadius: '50%',
+                      border: '1px solid rgba(17, 17, 17, 0.2)',
+                    }}
+                  />
+                </Col>
+                <Col style={{ justifyContent: 'flex-start' }}>
+                  <Card.Text>James Ivan Suminguit</Card.Text>
+                </Col>
+              </Row>
+            </SidebarHeader>
+          ) : (
+            <></>
+          )}
+
           <SidebarContent
             style={{
               paddingLeft: '10px',
@@ -58,7 +88,6 @@ const Sidebar = () => {
             <Menu>
               {menuItems.menuItem.map((item) => {
                 if (!item.subitem.length) {
-                  console.log(item.path);
                   return (
                     <MenuItem>
                       <Link to={item.path}>{item.title}</Link>
@@ -93,7 +122,9 @@ const Sidebar = () => {
           </SidebarFooter>
         </>
       ) : (
-        <div></div>
+        async () => {
+          await (<div></div>);
+        }
       )}
     </ProSidebar>
   );
