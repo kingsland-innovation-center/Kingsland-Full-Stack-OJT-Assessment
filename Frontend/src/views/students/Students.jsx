@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
+import axios from 'axios';
 
 /**
  * Implement the read students information.
- * 
+ *
  * The model definition is:
  * [{
  *  firstName: string,
@@ -14,6 +15,18 @@ import Table from 'react-bootstrap/Table';
  * }]
  */
 const Students = () => {
+  const [students, setStudents] = useState([]);
+  useEffect(() => {
+    axios
+      .get('http://localhost:3100/student')
+      .then((response) => {
+        if (response.data) setStudents(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <Container className='h-100 d-flex flex-column align-items-start justify-content-center'>
       <div className='white-wrap w-100'>
@@ -27,21 +40,17 @@ const Students = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Sean Cadubla</td>
-              <td>Zero-to-Blockchain Program</td>
-              <td>sean@kingsland.io</td>
-            </tr>
-            <tr>
-              <td>Rave Arevalo</td>
-              <td>Full Stack Developer Program</td>
-              <td>rave@kingsland.io</td>
-            </tr>
-            <tr>
-              <td>Pia Bonilla</td>
-              <td>Tech Sales Program</td>
-              <td>pia@kingsland.io</td>
-            </tr>
+            {students.map((student) => {
+              return (
+                <tr>
+                  <td>
+                    {student.firstname} {student.lastname}
+                  </td>
+                  <td>{student.program}</td>
+                  <td>{student.email}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </Table>
       </div>
